@@ -156,7 +156,10 @@ containerExportedMethods <- c("getSysPackages", "setSysPackages", "addSysPackage
 #' @export
 setMethod("getExportedNames", "BiocFEDRContainer",
           function(x){
-              containerExportedMethods
+              if(x$name == "redisRWorkerContainer")
+                  containerExportedMethods
+              else
+                  character()
           }
 )
 
@@ -164,8 +167,11 @@ setMethod("getExportedNames", "BiocFEDRContainer",
 #' @export
 setMethod("getExportedObject", "BiocFEDRContainer",
           function(x, name){
+              if(x$name != "redisRWorkerContainer"){
+                return(NULL)
+              }
               if(!name%in%containerExportedMethods)
-                  stop("Undefined object <",name,">")
+                  return(NULL)
               get(name)
           }
 )

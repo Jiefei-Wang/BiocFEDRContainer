@@ -31,9 +31,9 @@ NULL
 #' @examples BiocFEDRServerContainer()
 #' @return a `BiocFEDRContainer` object
 #' @export
-BiocFEDRServerContainer <- function(image = "dockerparallel/parallel-redis-server",
-                                   name = "redisRServerContainer",
-                                   environment = list()){
+BiocFEDRServerContainer <- function(environment = list()){
+  name <- "redisRServerContainer"
+  image <- "dockerparallel/bioc-foreach-doredis-server"
   BiocFEDRContainer(image = image, name=name,
                    environment=environment,
                    maxWorkerNum=1L)
@@ -52,12 +52,12 @@ BiocFEDRServerContainer <- function(image = "dockerparallel/parallel-redis-serve
 #' @examples BiocFEDRWorkerContainer()
 #' @return a `BiocFEDRContainer` object
 #' @export
-BiocFEDRWorkerContainer <- function(image = "dockerparallel/parallel-redis-worker",
-                                   name = "redisRWorkerContainer",
-                                   RPackages = NULL,
+BiocFEDRWorkerContainer <- function(RPackages = NULL,
                                    sysPackages = NULL,
                                    environment = list(),
                                    maxWorkerNum = 4L){
+  name <- "redisRWorkerContainer"
+  image <- "dockerparallel/bioc-foreach-doredis-worker"
   BiocFEDRContainer(image = image, name=name, RPackages=RPackages, sysPackages=sysPackages,
                    environment=environment,
                    maxWorkerNum=maxWorkerNum)

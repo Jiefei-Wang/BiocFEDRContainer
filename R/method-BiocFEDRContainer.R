@@ -33,7 +33,7 @@ NULL
 #' @export
 BiocFEDRServerContainer <- function(environment = list()){
   name <- "redisRServerContainer"
-  image <- "dockerparallel/bioc-foreach-doredis-server:main"
+  image <- "dockerparallel/parallel-redis-server"
   BiocFEDRContainer(image = image, name=name,
                    environment=environment,
                    maxWorkerNum=1L)
@@ -57,7 +57,7 @@ BiocFEDRWorkerContainer <- function(RPackages = NULL,
                                    environment = list(),
                                    maxWorkerNum = 4L){
   name <- "redisRWorkerContainer"
-  image <- "dockerparallel/bioc-foreach-doredis-worker:main"
+  image <- "dockerparallel/parallel-redis-worker"
   BiocFEDRContainer(image = image, name=name, RPackages=RPackages, sysPackages=sysPackages,
                    environment=environment,
                    maxWorkerNum=maxWorkerNum)
